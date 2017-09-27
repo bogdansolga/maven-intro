@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <!-- Advised POM structure - http://maven.apache.org/ref/3.5.0/maven-model/maven.html -->
 
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.7.RELEASE</version>
+    </parent>
 
     <groupId>net.safedata</groupId>
     <artifactId>maven.intro</artifactId>
@@ -64,12 +68,6 @@
         <maven>3.3</maven>
     </prerequisites>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.7.RELEASE</version>
-    </parent>
-
     <modules>
         <module>first-module</module>
         <module>second-module</module>
@@ -98,9 +96,9 @@
             <id>nexus-releases</id>
             <name>MyProject Nexus releases repo</name>
             <url>sftp://nexus.myproject.com</url>
+            <layout>default</layout>
 
             <uniqueVersion>true</uniqueVersion>
-            <layout>default</layout>
         </repository>
 
         <snapshotRepository>
@@ -225,19 +223,10 @@
 
     <repositories>
         <repository>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
             <id>spring-releases</id>
             <name>Spring Releases</name>
             <url>https://repo.spring.io/libs-release</url>
-        </repository>
 
-        <repository>
             <releases>
                 <enabled>true</enabled>
             </releases>
@@ -245,20 +234,30 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-
-            <id>maven-repository</id>
-            <name>Maven repository</name>
-            <url>https://central.maven.org/maven2</url>
         </repository>
 
         <repository>
+            <id>maven-repository</id>
+            <name>Maven repository</name>
+            <url>https://central.maven.org/maven2</url>
+
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+        </repository>
 
+        <repository>
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>https://repo.spring.io/libs-milestone</url>
+
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
     </repositories>
 
@@ -298,6 +297,7 @@
                         <nrOfIndentSpace>4</nrOfIndentSpace>
                         <sortDependencies>groupId,artifactId</sortDependencies>
                         <sortPlugins>groupId,artifactId</sortPlugins>
+                        <sortOrderFile>various-resources/custom-sort.xml</sortOrderFile>
                         <keepBlankLines>true</keepBlankLines>
                         <expandEmptyElements>false</expandEmptyElements>
                     </configuration>
@@ -382,8 +382,7 @@
                         <!-- command line usage: -Drun.jvmArguments="-server -Xms1g -Xmx4g..." -->
                         <jvmArguments>-server -Xms512m -Xmx1g -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
                             -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=70
-                            -XX:+UseCMSInitiatingOccupancyOnly -XX:+ScavengeBeforeFullGC -XX:+CMSScavengeBeforeRemark
-                        </jvmArguments>
+                            -XX:+UseCMSInitiatingOccupancyOnly -XX:+ScavengeBeforeFullGC -XX:+CMSScavengeBeforeRemark</jvmArguments>
                     </configuration>
                 </plugin>
             </plugins>
