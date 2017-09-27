@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>net.safedata</groupId>
+        <artifactId>maven.intro</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>first-module</artifactId>
+    <name>First module</name>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.safedata</groupId>
+            <artifactId>second-module</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>maven-intro-v${project.version}</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+
+                <includes>
+                    <include>**/*</include>
+                </includes>
+
+                <excludes>
+                    <exclude>excluded-file.txt</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>com.github.ekryd.sortpom</groupId>
+                <artifactId>sortpom-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+
+    </reporting>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <build>
+                <resources>
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+
+                        <includes>
+                            <include>logback-spring.xml</include>
+                        </includes>
+                    </resource>
+
+                    <resource>
+                        <filtering>false</filtering>
+                        <directory>src/main/resources</directory>
+
+                        <includes>
+                            <include>**/**.js</include>
+                        </includes>
+                    </resource>
+                </resources>
+
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+
+                        <configuration>
+                            <profiles>
+                                <profile>dev</profile>
+                            </profiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <properties>
+                <http.host>localhost</http.host>
+                <http.port>:8080</http.port>
+                <http.protocol>http</http.protocol>
+
+                <logback.loglevel>DEBUG</logback.loglevel>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+
+            <build>
+                <resources>
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+
+                        <includes>
+                            <include>logback-spring.xml</include>
+                        </includes>
+                    </resource>
+
+                    <resource>
+                        <filtering>false</filtering>
+                        <directory>src/main/resources</directory>
+
+                        <includes>
+                            <include>**/**.js</include>
+                        </includes>
+                    </resource>
+                </resources>
+
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+
+                        <configuration>
+                            <profiles>
+                                <profile>prod</profile>
+                            </profiles>
+
+                            <!-- command line usage: -Drun.jvmArguments="-server -Xms1g -Xmx4g..." -->
+                            <jvmArguments>-server -Xms1g -Xmx4g -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
+                                -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=70
+                                -XX:+UseCMSInitiatingOccupancyOnly -XX:+ScavengeBeforeFullGC -XX:+CMSScavengeBeforeRemark
+                            </jvmArguments>
+
+                            <!-- running in debug mode -->
+                            <jvmArguments>
+                                -Djava.rmi.server.hostname=localhost -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
+                            </jvmArguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <properties>
+                <http.host>prod.myproject.com</http.host>
+                <http.port>8080</http.port>
+                <http.protocol>https</http.protocol>
+
+                <logback.loglevel>INFO</logback.loglevel>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>javax.mail-api</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>staging</id>
+
+            <build>
+                <resources>
+                    <resource>
+                        <filtering>true</filtering>
+                        <directory>src/main/resources</directory>
+
+                        <includes>
+                            <include>**/**.js</include>
+                        </includes>
+                    </resource>
+                </resources>
+
+                <plugins>
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+
+                        <configuration>
+                            <profiles>
+                                <profile>staging</profile>
+                            </profiles>
+
+                            <!-- command line usage: -Drun.jvmArguments="-server -Xms1g -Xmx4g..." -->
+                            <jvmArguments>-server -Xms1g -Xmx2g -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
+                                -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=70
+                                -XX:+UseCMSInitiatingOccupancyOnly -XX:+ScavengeBeforeFullGC -XX:+CMSScavengeBeforeRemark
+                            </jvmArguments>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <properties>
+                <http.host>staging.myproject.com</http.host>
+                <http.port />
+                <http.protocol>https</http.protocol>
+
+                <logback.loglevel>DEBUG</logback.loglevel>
+            </properties>
+
+            <dependencies>
+                <dependency>
+                    <groupId>javax.mail</groupId>
+                    <artifactId>javax.mail-api</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+</project>

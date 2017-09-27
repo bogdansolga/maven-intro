@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Advised POM structure - http://maven.apache.org/ref/3.5.0/maven-model/maven.html -->
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>net.safedata</groupId>
+    <artifactId>maven.intro</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Maven intro</name>
+    <description>Maven intro project</description>
+    <url>https://learnspring.eu</url>
+    <inceptionYear>2016</inceptionYear>
+
+    <organization>
+        <name>SafeData Net</name>
+        <url>http://www.safedatanet.ro</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>Copyright 2013-2015 the original author or authors. Licensed under the Apache License, Version 2.0
+                (the "License"); you may not use this file except in compliance with the License.
+                You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0</comments>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>bogdan.solga</id>
+            <name>Bogdan Solga</name>
+            <email>bogdan.solga@gmail.com</email>
+            <url>http://about.me/bogdan.solga/</url>
+
+            <organization>SafeData Net</organization>
+
+            <roles>
+                <role>main-developer</role>
+            </roles>
+            <timezone>GMT</timezone>
+        </developer>
+    </developers>
+
+    <prerequisites>
+        <maven>3.3</maven>
+    </prerequisites>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.7.RELEASE</version>
+    </parent>
+
+    <modules>
+        <module>first-module</module>
+        <module>second-module</module>
+    </modules>
+
+    <scm>
+        <!-- reference - http://maven.apache.org/scm/git.html -->
+        <connection>scm:git:https://github.com/bogdansolga/maven-intro</connection>
+        <developerConnection>scm:git:git://github.com/bogdansolga/maven-intro</developerConnection>
+        <url>https://github.com/bogdansolga/maven-intro</url>
+    </scm>
+
+    <issueManagement>
+        <system>JIRA</system>
+        <url>https://jira.myproject.com</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>Jenkins</system>
+        <url>https://build.myproject.com</url>
+    </ciManagement>
+
+    <!-- reference - https://maven.apache.org/pom.html#Repository -->
+    <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>MyProject Nexus releases repo</name>
+            <url>sftp://nexus.myproject.com</url>
+
+            <uniqueVersion>true</uniqueVersion>
+            <layout>default</layout>
+        </repository>
+
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>MyProject Nexus snapshots repo</name>
+            <url>sftp://nexus.snapshots.myproject.com</url>
+
+            <uniqueVersion>true</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <!--
+        Useful Maven commands
+
+            Display dependency updates                  mvn versions:display-dependency-updates
+            Display plugin updates                      mvn versions:display-plugin-updates
+            Display dependency tree                     mvn dependency:tree -Ddetail
+            Display dependency list                     mvn dependency:list
+            Display effective POM                       mvn help:effective-pom
+            Display project settings                    mvn help:effective-settings
+            Display system and environment variables    mvn help:system
+            Display build classpath                     mvn dependency:build-classpath
+    -->
+
+    <!-- Maven parallel builds - mvn -T 6 clean package -->
+    <properties>
+        <java.version>1.8</java.version>
+
+        <maven.compiler.plugin.version>3.5.1</maven.compiler.plugin.version>
+        <maven.resources.plugin.version>3.0.1</maven.resources.plugin.version>
+        <maven.sortpom.plugin.version>2.8.0</maven.sortpom.plugin.version>
+        <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <spring-boot.version>1.5.7.RELEASE</spring-boot.version>
+        <start.class>net.safedata.maven.intro.MavenIntroApplication</start.class>
+
+        <testng.version>6.11</testng.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-logging</artifactId>
+                <version>${spring-boot.version}</version>
+
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>log4j-over-slf4j</artifactId>
+                    </exclusion>
+
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>jul-to-slf4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${spring-boot.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>${testng.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- specify the dependencies which will be used in all the modules -->
+    <dependencies>
+
+    </dependencies>
+
+    <repositories>
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>spring-releases</id>
+            <name>Spring Releases</name>
+            <url>https://repo.spring.io/libs-release</url>
+        </repository>
+
+        <repository>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+
+            <id>maven-repository</id>
+            <name>Maven repository</name>
+            <url>https://central.maven.org/maven2</url>
+        </repository>
+
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-releases</id>
+            <name>Spring Releases</name>
+            <url>https://repo.spring.io/libs-release</url>
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.github.ekryd.sortpom</groupId>
+                    <artifactId>sortpom-maven-plugin</artifactId>
+                    <version>${maven.sortpom.plugin.version}</version>
+
+                    <executions>
+                        <execution>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sort</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+
+                    <configuration>
+                        <sortProperties>true</sortProperties>
+                        <nrOfIndentSpace>4</nrOfIndentSpace>
+                        <sortDependencies>groupId,artifactId</sortDependencies>
+                        <sortPlugins>groupId,artifactId</sortPlugins>
+                        <keepBlankLines>true</keepBlankLines>
+                        <expandEmptyElements>false</expandEmptyElements>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven.compiler.plugin.version}</version>
+
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <fork>true</fork>
+                        <optimize>true</optimize>
+                        <showWarnings>true</showWarnings>
+                        <meminitial>512m</meminitial>
+                        <maxmem>1024m</maxmem>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.plugin.version}</version>
+
+                    <configuration>
+                        <encoding>UTF-8</encoding>
+                        <nonFilteredFileExtensions>
+                            <extension>png</extension>
+                            <extension>jpg</extension>
+                            <extension>css</extension>
+
+                            <!-- do not filter font files - http://stackoverflow.com/a/31475762 -->
+                            <extension>ttf</extension>
+                        </nonFilteredFileExtensions>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire.plugin.version}</version>
+
+                    <configuration>
+                        <parallel>methods</parallel>
+                        <threadCount>4</threadCount>
+                        <!-- Force alphabetical order to have a reproducible build -->
+                        <runOrder>alphabetical</runOrder>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+
+                    <!-- repackage the jar that is built during the Maven 'package' phase -->
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+
+                    <configuration>
+                        <executable>true</executable>
+                        <mainClass>${start.class}</mainClass>
+
+                        <!-- command line usage: -Drun.jvmArguments="-server -Xms1g -Xmx4g..." -->
+                        <jvmArguments>-server -Xms512m -Xmx1g -XX:+UseConcMarkSweepGC -XX:+UseParNewGC
+                            -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=70
+                            -XX:+UseCMSInitiatingOccupancyOnly -XX:+ScavengeBeforeFullGC -XX:+CMSScavengeBeforeRemark
+                        </jvmArguments>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>com.github.ekryd.sortpom</groupId>
+                <artifactId>sortpom-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
