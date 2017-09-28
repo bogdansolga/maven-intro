@@ -140,8 +140,8 @@
             <build>
                 <resources>
                     <resource>
-                        <filtering>true</filtering>
                         <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
 
                         <includes>
                             <include>logback-spring.xml</include>
@@ -149,8 +149,8 @@
                     </resource>
 
                     <resource>
-                        <filtering>false</filtering>
                         <directory>src/main/resources</directory>
+                        <filtering>false</filtering>
 
                         <includes>
                             <include>**/**.js</include>
@@ -202,8 +202,8 @@
             <build>
                 <resources>
                     <resource>
-                        <filtering>true</filtering>
                         <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
 
                         <includes>
                             <include>**/**.js</include>
