@@ -5,11 +5,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <!--
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.7.RELEASE</version>
     </parent>
+    -->
 
     <groupId>net.safedata</groupId>
     <artifactId>maven.intro</artifactId>
@@ -143,6 +145,19 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <!--
+                    Import dependency management from Spring Boot
+                    A BOM specifies the versions of a "stack" (or a collection) of artifacts.
+                    We use it here so that we always get the correct versions of artifacts.
+                -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
@@ -365,6 +380,7 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
 
                     <!-- repackage the jar that is built during the Maven 'package' phase -->
                     <executions>

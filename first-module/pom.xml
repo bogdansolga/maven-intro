@@ -41,9 +41,11 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>false</filtering>
 
                 <includes>
-                    <include>**/*</include>
+                    <include>application.yml</include>
+                    <include>banner.txt</include>
                 </includes>
 
                 <excludes>
@@ -86,7 +88,7 @@
     </build>
 
     <reporting>
-
+        <outputDirectory>src/main/resources/report</outputDirectory>
     </reporting>
 
     <profiles>
@@ -99,20 +101,12 @@
             <build>
                 <resources>
                     <resource>
+                        <directory>src/main/resources</directory>
                         <filtering>true</filtering>
-                        <directory>src/main/resources</directory>
 
                         <includes>
+                            <include>filtered-file.txt</include>
                             <include>logback-spring.xml</include>
-                        </includes>
-                    </resource>
-
-                    <resource>
-                        <filtering>false</filtering>
-                        <directory>src/main/resources</directory>
-
-                        <includes>
-                            <include>**/**.js</include>
                         </includes>
                     </resource>
                 </resources>
