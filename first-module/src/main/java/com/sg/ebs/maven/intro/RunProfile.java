@@ -1,4 +1,4 @@
-package net.safedata.maven.intro;
+package com.sg.ebs.maven.intro;
 
 @SuppressWarnings("unused")
 public final class RunProfile {

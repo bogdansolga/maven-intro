@@ -1,4 +1,4 @@
-package net.safedata.maven.intro.service;
+package com.sg.ebs.maven.intro.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

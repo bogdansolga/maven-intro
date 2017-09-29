@@ -1,4 +1,4 @@
-package net.safedata.maven.intro;
+package com.sg.ebs.maven.intro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

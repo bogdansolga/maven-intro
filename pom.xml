@@ -13,7 +13,7 @@
     </parent>
     -->
 
-    <groupId>net.safedata</groupId>
+    <groupId>com.sg.ebs</groupId>
     <artifactId>maven.intro</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -138,7 +138,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <spring-boot.version>1.5.7.RELEASE</spring-boot.version>
-        <start.class>net.safedata.maven.intro.MavenIntroApplication</start.class>
+        <start.class>MavenIntroApplication</start.class>
 
         <testng.version>6.11</testng.version>
     </properties>

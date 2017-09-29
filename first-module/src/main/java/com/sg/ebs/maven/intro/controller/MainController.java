@@ -1,6 +1,6 @@
-package net.safedata.maven.intro.controller;
+package com.sg.ebs.maven.intro.controller;
 
-import net.safedata.maven.intro.service.ProductService;
+import com.sg.ebs.maven.intro.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
