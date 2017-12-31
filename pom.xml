@@ -137,7 +137,7 @@
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <spring-boot.version>1.5.7.RELEASE</spring-boot.version>
+        <spring-boot.version>1.5.9.RELEASE</spring-boot.version>
         <start.class>MavenIntroApplication</start.class>
 
         <testng.version>6.11</testng.version>
