@@ -18,7 +18,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.sg.ebs.maven.intro" level="INFO"/>
+    <logger name="net.safedata.maven.intro" level="INFO"/>
 
     <logger name="ch.qos.logback" level="WARN"/>
     <logger name="org.apache" level="WARN"/>
