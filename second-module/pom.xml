@@ -34,23 +34,6 @@
                 <groupId>com.github.ekryd.sortpom</groupId>
                 <artifactId>sortpom-maven-plugin</artifactId>
             </plugin>
-
-            <!-- http://www.mojohaus.org/properties-maven-plugin/index.html -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.0.0</version>
-
-                <executions>
-                    <execution>
-                        <phase>initialize</phase>
-
-                        <goals>
-                            <goal>read-project-properties</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
     </build>
 

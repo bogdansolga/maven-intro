@@ -131,6 +131,7 @@
 
         <maven.clean.plugin.version>3.0.0</maven.clean.plugin.version>
         <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+        <maven.properties.plugin.version>1.0.0</maven.properties.plugin.version>
         <maven.resources.plugin.version>3.0.2</maven.resources.plugin.version>
         <maven.sortpom.plugin.version>2.8.0</maven.sortpom.plugin.version>
         <maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
@@ -375,6 +376,23 @@
                         <!-- Force alphabetical order to have a reproducible build -->
                         <runOrder>alphabetical</runOrder>
                     </configuration>
+                </plugin>
+
+                <!-- http://www.mojohaus.org/properties-maven-plugin/index.html -->
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>properties-maven-plugin</artifactId>
+                    <version>${maven.properties.plugin.version}</version>
+
+                    <executions>
+                        <execution>
+                            <phase>initialize</phase>
+
+                            <goals>
+                                <goal>read-project-properties</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <plugin>
