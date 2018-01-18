@@ -29,6 +29,17 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+
+                <includes>
+                    <include>webservices-endpoints.properties</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>com.github.ekryd.sortpom</groupId>
@@ -42,17 +53,6 @@
             <id>dh</id>
 
             <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>true</filtering>
-
-                        <includes>
-                            <include>webservices-endpoints.properties</include>
-                        </includes>
-                    </resource>
-                </resources>
-
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
@@ -72,17 +72,6 @@
             <id>di</id>
 
             <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>true</filtering>
-
-                        <includes>
-                            <include>webservices-endpoints.properties</include>
-                        </includes>
-                    </resource>
-                </resources>
-
                 <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
